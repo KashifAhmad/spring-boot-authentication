@@ -1,0 +1,23 @@
+version: '3.8' # Docker Compose version
+
+services:
+  app:
+    image: demo-spring-app # The Docker image for your Spring Boot app
+    ports:
+      - "8080:8080" # Expose port 8080 to the host
+    depends_on:
+      - db # Optional if you have a database
+
+  db:
+    image: postgres:14 # PostgreSQL image
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: demo_db
+    ports:
+      - "5432:5432" # Expose PostgreSQL port
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persist database data
+
+volumes:
+  postgres_data:
