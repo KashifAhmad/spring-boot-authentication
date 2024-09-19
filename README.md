@@ -2,6 +2,8 @@
 ---
 **Repository Name:** `spring-boot-user-management`
 
+**Under Development**
+
 **Description:**
 A Spring Boot application that provides a robust user management system with authentication and authorization features. This project includes:
 
@@ -9,7 +11,6 @@ A Spring Boot application that provides a robust user management system with aut
 - **User Login:** Supports user login with BCrypt for Password Hashing for stateless and secure access.
 - **Error Handling:** Implements comprehensive error handling with custom responses and status codes.
 - **Security Configurations:** Configured Spring Security for protecting API endpoints and handling authentication.
-- **API Documentation:** Provides detailed API documentation for ease of use and integration.
 
 **Features:**
 - **User Creation API:** Endpoint to register new users with hashed passwords.
