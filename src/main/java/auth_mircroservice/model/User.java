@@ -1,6 +1,7 @@
 package auth_mircroservice.model;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Table(name = "users")
 public class User {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

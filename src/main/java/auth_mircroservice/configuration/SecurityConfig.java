@@ -15,7 +15,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)  // Updated syntax for disabling CSRF
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/users/create", "/users/login").permitAll()  // Allow access to user creation without authentication
+                        .requestMatchers("/users/register", "/users/login").permitAll()  // Allow access to user creation without authentication
                         .anyRequest().authenticated()  // Require authentication for all other requests
                 );
         return http.build();
