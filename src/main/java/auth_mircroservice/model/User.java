@@ -3,6 +3,9 @@ package auth_mircroservice.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -17,12 +20,24 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String createdTimeStamp;
+
+    // Define your desired format
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     // Constructors
-    public User() {}
+    public User() {
+    }
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdTimeStamp = LocalDateTime.now().format(FORMATTER);
     }
 
     // Getters and setters
@@ -48,5 +63,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCreatedTimeStamp() {
+        return createdTimeStamp;
     }
 }
