@@ -1,14 +1,14 @@
-package com.example.demoJavaSpring.service;
+package auth_mircroservice.service;
 
-import com.example.demoJavaSpring.model.ApiResponse;
-import com.example.demoJavaSpring.model.User;
-import com.example.demoJavaSpring.repository.UserRepository;
+import auth_mircroservice.model.ApiResponse;
+import auth_mircroservice.model.User;
+import auth_mircroservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import static com.example.demoJavaSpring.constants.HttpResponseCodes.*;
-import static com.example.demoJavaSpring.constants.HttpResponseMessages.*;
+import static auth_mircroservice.constants.HttpResponseCodes.*;
+import static auth_mircroservice.constants.HttpResponseMessages.*;
 
 @Service
 public class UserService {

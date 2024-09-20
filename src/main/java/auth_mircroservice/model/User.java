@@ -1,4 +1,4 @@
-package com.example.demoJavaSpring.model;
+package auth_mircroservice.model;
 
 
 import jakarta.persistence.*;

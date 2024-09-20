@@ -1,8 +1,8 @@
-package com.example.demoJavaSpring.exceptions;
+package auth_mircroservice.exceptions;
 
-import com.example.demoJavaSpring.constants.HttpResponseCodes;
-import com.example.demoJavaSpring.constants.HttpResponseMessages;
-import com.example.demoJavaSpring.model.ApiResponse;
+import auth_mircroservice.constants.HttpResponseCodes;
+import auth_mircroservice.constants.HttpResponseMessages;
+import auth_mircroservice.model.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

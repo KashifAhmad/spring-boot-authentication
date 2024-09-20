@@ -1,4 +1,4 @@
-package com.example.demoJavaSpring;
+package auth_mircroservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
