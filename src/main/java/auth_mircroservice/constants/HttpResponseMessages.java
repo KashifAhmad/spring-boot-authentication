@@ -1,4 +1,4 @@
-package com.example.demoJavaSpring.constants;
+package auth_mircroservice.constants;
 
 public class HttpResponseMessages {
     //Success Messages

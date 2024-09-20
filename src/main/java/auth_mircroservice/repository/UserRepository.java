@@ -1,6 +1,6 @@
-package com.example.demoJavaSpring.repository;
+package auth_mircroservice.repository;
 
-import com.example.demoJavaSpring.model.User;
+import auth_mircroservice.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,4 @@
-package com.example.demoJavaSpring.model;
-
-import com.example.demoJavaSpring.constants.HttpResponseCodes;
+package auth_mircroservice.model;
 
 public class ApiResponse<T> {
     private boolean success;

@@ -1,10 +1,8 @@
-package com.example.demoJavaSpring.controller;
+package auth_mircroservice.controller;
 
-import com.example.demoJavaSpring.constants.HttpResponseCodes;
-import com.example.demoJavaSpring.constants.HttpResponseMessages;
-import com.example.demoJavaSpring.model.ApiResponse;
-import com.example.demoJavaSpring.model.User;
-import com.example.demoJavaSpring.service.UserService;
+import auth_mircroservice.model.ApiResponse;
+import auth_mircroservice.model.User;
+import auth_mircroservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
