@@ -80,7 +80,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.example.auth.AuthMicroserviceApplication</mainClass>
+                    <mainClass>com.apprack.auth.AuthMicroserviceApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

@@ -7,10 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="auth_microservice" />
+        <module name="prod_mng_microservice" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="prod_mng_microservice" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>
