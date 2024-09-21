@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="demo-spring" />
+        <module name="auth_microservice" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="prod_mng_microservice" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
