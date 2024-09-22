@@ -13,11 +13,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
+        http.csrf(AbstractHttpConfigurer::disable)  // Updated syntax for disabling CSRF
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(HttpMethod.POST,"/products/add_category").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/products/add_category", "products/add_product").permitAll()  // Allow access to user creation without authentication
+                        .anyRequest().authenticated()  // Require authentication for all other requests
                 );
         return http.build();
+
     }
 }

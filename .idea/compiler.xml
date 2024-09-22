@@ -10,5 +10,8 @@
         <module name="prod_mng_microservice" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="prod-mng-microservice" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

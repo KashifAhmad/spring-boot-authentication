@@ -28,7 +28,6 @@ public class ProductController {
 
     @PostMapping("/add_category")
     public ResponseEntity<ApiResponse<Category>> addCategory(@RequestBody Category category) {
-        System.out.println("Received_category1: " + category.getCategoryName()); // Debug log
         ApiResponse<Category> response = productService.addCategory(category);
         HttpStatus status = HttpStatus.valueOf(response.getCode());
         return new ResponseEntity<>(response, status);
