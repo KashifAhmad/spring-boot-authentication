@@ -42,10 +42,10 @@ public class UserService {
         return ApiResponse.success(SUCCESS_CODE, savedUser, SUCCESS_MESSAGE);
     }
 
-    public ApiResponse<?> login(String username, String rawPassword) {
+    public ApiResponse<LoginResponse> login(String username, String rawPassword) {
         User user = userLoginRepository.findByUsername(username);
-        if (user != null) {
-            return ApiResponse.error(UNAUTHORIZED_CODE, USERNAME_ALREADY_EXISTS);
+        if (user == null) {
+            return ApiResponse.error(UNAUTHORIZED_CODE, USER_NOT_FOUND);
         }
 
         if (!passwordEncoder.matches(rawPassword, user.getPassword())) {
@@ -53,10 +53,16 @@ public class UserService {
         }
 
         // Generate JWT Token after successful login
-        String token = jwtTokenUtil.generateToken(username);
+        String token = jwtTokenUtil.generateToken(user.getUsername());
 
-        // Create a response object to return both the user and token
-        LoginResponse response = new LoginResponse(token, user);
+        // Create a LoginResponse object to return both the user and token
+        LoginResponse response = new LoginResponse(
+                user.getId(),
+                user.getUsername(),
+                user.getCreatedTimeStamp(),
+                token,
+                "Login successful"
+        );
 
         return ApiResponse.success(SUCCESS_CODE, response, LOGIN_SUCCESSFULLY);
     }

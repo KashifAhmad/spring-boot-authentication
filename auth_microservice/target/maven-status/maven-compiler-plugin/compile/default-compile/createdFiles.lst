@@ -16,4 +16,3 @@ auth_microservice/HttpResponseMessages.class
 com/apprack/auth/utils/MyUserDetailsService.class
 com/apprack/auth/model/RegisterUser.class
 com/apprack/auth/repository/UserRegisterRepository.class
-com/apprack/auth/model/LoginUserResponse.class

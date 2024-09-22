@@ -1,14 +1,45 @@
 package com.apprack.auth.model;
-public class LoginResponse {
-    private String token;
-    private User user;
 
-    public LoginResponse(String token, User user) {
+public class LoginResponse {
+    private Long id;
+    private String username;
+    private String createdTimeStamp;
+    private String token;
+    private String message;
+
+    public LoginResponse(Long id, String username, String createdTimeStamp, String token, String message) {
+        this.id = id;
+        this.username = username;
+        this.createdTimeStamp = createdTimeStamp;
         this.token = token;
-        this.user = user;
+        this.message = message;
     }
 
-    // Getters and Setters
+    // Getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getCreatedTimeStamp() {
+        return createdTimeStamp;
+    }
+
+    public void setCreatedTimeStamp(String createdTimeStamp) {
+        this.createdTimeStamp = createdTimeStamp;
+    }
+
     public String getToken() {
         return token;
     }
@@ -17,11 +48,11 @@ public class LoginResponse {
         this.token = token;
     }
 
-    public User getUser() {
-        return user;
+    public String getMessage() {
+        return message;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

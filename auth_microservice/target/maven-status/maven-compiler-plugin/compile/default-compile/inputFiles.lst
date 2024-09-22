@@ -10,7 +10,6 @@
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/model/ApiResponse.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/repository/UserRegisterRepository.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/model/RegisterUser.java
-/Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/model/LoginUserResponse.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/AuthMicroserviceApplication.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/exceptions/GlobalExceptionHandler.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/configuration/SecurityConfig.java
