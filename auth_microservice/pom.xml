@@ -9,6 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath> <!-- Adjust this based on your directory structure -->
     </parent>
+    <groupId>com.apprack</groupId>
     <artifactId>auth_microservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>

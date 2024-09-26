@@ -1,4 +1,4 @@
-package com.apprack.auth.utils;
+package com.apprack.pm_ms.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -11,7 +11,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.function.Function;
 
-@Component("authJwtTokenUtil")
+@Component("productJwtTokenUtil")
 public class JwtTokenUtil {
 
     private final SecretKey secretKey;
@@ -25,6 +25,8 @@ public class JwtTokenUtil {
 
         byte[] decodedKey = Base64.getDecoder().decode(SECRET_KEY);
         System.out.println("DecodedSecretKeyLength: " + decodedKey.length); // Should be 32 bytes
+
+
     }
 
     public String extractUsername(String token) {

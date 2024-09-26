@@ -1,5 +1,6 @@
 package com.apprack.pm_ms.controller;
 
+import ch.qos.logback.classic.Logger;
 import com.apprack.pm_ms.model.ApiResponse;
 import com.apprack.pm_ms.model.Category;
 import com.apprack.pm_ms.model.Products;
@@ -18,6 +19,7 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    Logger logger;
 
     @PostMapping("/add_product")
     public ResponseEntity<ApiResponse<Products>> addProduct(@RequestBody Products products) {
@@ -28,9 +30,14 @@ public class ProductController {
 
     @PostMapping("/add_category")
     public ResponseEntity<ApiResponse<Category>> addCategory(@RequestBody Category category) {
-        ApiResponse<Category> response = productService.addCategory(category);
-        HttpStatus status = HttpStatus.valueOf(response.getCode());
-        return new ResponseEntity<>(response, status);
+        try {
+            ApiResponse<Category> response = productService.addCategory(category);
+            HttpStatus status = HttpStatus.valueOf(response.getCode());
+            return new ResponseEntity<>(response, status);
+        } catch (Exception e) {
+            logger.error("Error adding category: " + e.getMessage(), e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

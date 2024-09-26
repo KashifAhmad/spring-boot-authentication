@@ -1,6 +1,8 @@
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/model/LoginResponse.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/constants/HttpResponseCodes.java
+/Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/configuration/AuthSecurityConfig.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/model/User.java
+/Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/exceptions/AuthExceptionHandler.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/repository/UserLoginRepository.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/utils/JwtTokenUtil.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/service/UserService.java
@@ -11,8 +13,6 @@
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/repository/UserRegisterRepository.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/model/RegisterUser.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/AuthMicroserviceApplication.java
-/Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/exceptions/GlobalExceptionHandler.java
-/Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/configuration/SecurityConfig.java
+/Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/utils/KeyGeneratorUtil.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/constants/HttpResponseMessages.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/utils/JwtRequestFilter.java
-/Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/auth_microservice/src/main/java/com/apprack/auth/utils/MyUserDetailsService.java

@@ -3,15 +3,18 @@ package com.apprack.auth.controller;
 import com.apprack.auth.model.*;
 import com.apprack.auth.service.UserService;
 import com.apprack.auth.utils.JwtTokenUtil;
-import com.apprack.auth.utils.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import static com.apprack.auth.constants.HttpResponseCodes.NOT_FOUND_CODE;
+import static com.apprack.auth.constants.HttpResponseCodes.SUCCESS_CODE;
 
 @RestController
 @RequestMapping("/users")
@@ -21,9 +24,6 @@ public class UserController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private MyUserDetailsService userDetailsService;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -38,9 +38,21 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<LoginResponse>> login(@RequestBody LoginRequest loginRequest) {
         ApiResponse<LoginResponse> response = userService.login(loginRequest.getUsername(), loginRequest.getPassword());
-
         HttpStatus status = HttpStatus.valueOf(response.getCode());
         return new ResponseEntity<>(response, status);
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<ApiResponse<RegisterUser>> getProfile(@AuthenticationPrincipal UserDetails userDetails) {
+        String username = userDetails.getUsername(); // Get the username from the authenticated user details
+        RegisterUser user = userService.findUserByUsername(username); // Fetch user details from the service
+
+        if (user != null) {
+            return ResponseEntity.ok(ApiResponse.success(SUCCESS_CODE, user, "User profile retrieved successfully."));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(ApiResponse.error(NOT_FOUND_CODE, "User not found"));
+        }
     }
 
 }

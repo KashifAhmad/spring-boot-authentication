@@ -1,27 +1,27 @@
 package com.apprack.auth.service;
 
-import com.apprack.auth.model.ApiResponse;
-import com.apprack.auth.model.LoginResponse;
-import com.apprack.auth.model.User;
+import com.apprack.auth.model.*;
 import com.apprack.auth.repository.UserLoginRepository;
 import com.apprack.auth.repository.UserRegisterRepository;
 import com.apprack.auth.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.apprack.auth.model.RegisterUser;
 
 import static auth_microservice.HttpResponseMessages.*;
 import static com.apprack.auth.constants.HttpResponseCodes.*;
 
 
+import java.util.ArrayList;
 import java.util.Optional;
-
 @Service
 public class UserService {
 
     @Autowired
     private UserRegisterRepository userRegisterRepository;
+
     @Autowired
     private UserLoginRepository userLoginRepository;
 
@@ -31,6 +31,7 @@ public class UserService {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    // Method to create a user
     public ApiResponse<RegisterUser> createUser(RegisterUser user) {
         Optional<RegisterUser> existingUser = userRegisterRepository.findByUsername(user.getUsername());
         if (existingUser.isPresent()) {
@@ -42,6 +43,7 @@ public class UserService {
         return ApiResponse.success(SUCCESS_CODE, savedUser, SUCCESS_MESSAGE);
     }
 
+    // Method to login a user
     public ApiResponse<LoginResponse> login(String username, String rawPassword) {
         User user = userLoginRepository.findByUsername(username);
         if (user == null) {
@@ -66,4 +68,20 @@ public class UserService {
 
         return ApiResponse.success(SUCCESS_CODE, response, LOGIN_SUCCESSFULLY);
     }
+
+    // Method to load user details by username
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("Attempting to load user with username: " + username); // Log the attempt
+        RegisterUser user = userRegisterRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+                new ArrayList<>());
+    }
+
+    public RegisterUser findUserByUsername(String username) {
+        return userRegisterRepository.findByUsername(username)
+                .orElse(null); // Return null if user is not found
+    }
+
 }

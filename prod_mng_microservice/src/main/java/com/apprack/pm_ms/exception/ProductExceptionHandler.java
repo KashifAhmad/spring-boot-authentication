@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class ProductExceptionHandler {
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<String>> handleException(Exception e) {
         System.err.println("Exception caught: " + e.getMessage()); // Log the exception message
