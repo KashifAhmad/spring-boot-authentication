@@ -11,14 +11,14 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long categoryId;
 
     @Column(name = "category_name", nullable = false, unique = true)
     private String categoryName;
 
 
     // One-to-Many relationship with Product
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonManagedReference
     private Set<Products> products = new HashSet<>();
 
@@ -30,12 +30,12 @@ public class Category {
         this.categoryName = name;
     }
 
-    public Long getId() {
-        return id;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCategoryId(Long id) {
+        this.categoryId = id;
     }
 
     public String getCategoryName() {

@@ -11,7 +11,7 @@ public class Products {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long productId;
 
     @Column(name = "productName", nullable = false)
     private String productName;
@@ -26,7 +26,7 @@ public class Products {
     private BigDecimal price;
 
     // Many-to-One relationship with Category
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id", nullable = false)
     @JsonBackReference
     private Category category;
@@ -43,12 +43,12 @@ public class Products {
         this.category = category;
     }
 
-    public Long getId() {
-        return id;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setProductId(Long id) {
+        this.productId = id;
     }
 
     public String getProductName() {

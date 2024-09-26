@@ -31,6 +31,7 @@ public class ProductController {
         return new ResponseEntity<>(response, status);
     }
 
+
     @PostMapping("/add_category")
     public ResponseEntity<ApiResponse<Category>> addCategory(@RequestHeader("Authorization") String tokenWithBearer, @RequestBody Category category) {
         try {
@@ -67,8 +68,32 @@ public class ProductController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
 
+    @DeleteMapping("/delete_category/{id}")
+    public ResponseEntity<ApiResponse<String>> deleteCategory(@RequestHeader("Authorization") String tokenWithBearer, @PathVariable Long id) {
+        try {
+            // Optional: Validate the token and user existence if needed (like you did in add_category)
 
+            ApiResponse<String> response = productService.deleteCategory(id);
+            HttpStatus status = HttpStatus.valueOf(response.getCode());
+            return new ResponseEntity<>(response, status);
+        } catch (Exception e) {
+            logger.error("Error deleting category: " + e.getMessage(), e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/get_all_products")
+    public ResponseEntity<ApiResponse<List<Products>>> getAllProducts() {
+        try {
+            ApiResponse<List<Products>> response = productService.getAllProducts();
+            HttpStatus status = HttpStatus.valueOf(response.getCode());
+            return new ResponseEntity<>(response, status);
+        } catch (Exception e) {
+            logger.error("Error fetching products: " + e.getMessage(), e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 
