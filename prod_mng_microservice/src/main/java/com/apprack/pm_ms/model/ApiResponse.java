@@ -1,16 +1,17 @@
 package com.apprack.pm_ms.model;
 
 public class ApiResponse<T> {
-    private boolean success;
     private int code;
-    private T data;
+    private boolean success;
     private String message;  // This will hold the success or failure message
+    private T data;
 
     public ApiResponse(boolean success, int code, T data, String message) {
-        this.success = success;
         this.code = code;
-        this.data = data;
+        this.success = success;
         this.message = message;
+        this.data = data;
+
     }
 
     // Factory method for success response

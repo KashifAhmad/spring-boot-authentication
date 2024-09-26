@@ -1,5 +1,6 @@
 package com.apprack.pm_ms.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,6 +19,7 @@ public class Category {
 
     // One-to-Many relationship with Product
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<Products> products = new HashSet<>();
 
     // Constructors, Getters, Setters

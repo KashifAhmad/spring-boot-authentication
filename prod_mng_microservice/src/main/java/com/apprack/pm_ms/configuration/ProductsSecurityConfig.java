@@ -27,7 +27,7 @@ public class ProductsSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable) // Disable CSRF protection
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/products/add_product", "/products/add_category").permitAll()
+                        .requestMatchers("/products/add_product", "/products/add_category", "/products/get_all_categories").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Make session stateless

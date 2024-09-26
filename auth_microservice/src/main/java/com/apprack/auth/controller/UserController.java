@@ -55,4 +55,22 @@ public class UserController {
         }
     }
 
+    @GetMapping("/getUser")
+    public ResponseEntity<?> getUser(@RequestHeader("Authorization") String token) {
+        try {
+            String username = jwtTokenUtil.extractUsername(token.substring(7)); // Remove 'Bearer ' prefix
+
+            // Check if the user exists in the database
+            RegisterUser user = userService.findUserByUsername(username);
+            if (user == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
+            }
+
+            // Return user details (or a confirmation)
+            return ResponseEntity.ok(user);  // Or just send status code OK if you don't want to expose user details
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
+        }
+    }
+
 }

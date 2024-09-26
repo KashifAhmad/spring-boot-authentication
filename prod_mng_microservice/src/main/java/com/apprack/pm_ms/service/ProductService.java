@@ -8,6 +8,8 @@ import com.apprack.pm_ms.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static com.apprack.pm_ms.contants.HttpResponseCodes.SUCCESS_CODE;
 import static com.apprack.pm_ms.contants.HttpResponseCodes.UNAUTHORIZED_CODE;
 import static com.apprack.pm_ms.contants.HttpResponseMessages.SUCCESS_MESSAGE;
@@ -44,5 +46,11 @@ public class ProductService {
         Category savedCategory = categoryRepository.save(category);
         return ApiResponse.success(SUCCESS_CODE, savedCategory, SUCCESS_MESSAGE);
     }
+
+    public ApiResponse<List<Category>> getAllCategories() {
+        List<Category> categories = categoryRepository.findAll();
+        return ApiResponse.success(SUCCESS_CODE, categories, SUCCESS_MESSAGE);
+    }
+
 
 }

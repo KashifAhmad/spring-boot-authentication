@@ -5,10 +5,13 @@ import com.apprack.auth.repository.UserLoginRepository;
 import com.apprack.auth.repository.UserRegisterRepository;
 import com.apprack.auth.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import static auth_microservice.HttpResponseMessages.*;
 import static com.apprack.auth.constants.HttpResponseCodes.*;
@@ -16,6 +19,7 @@ import static com.apprack.auth.constants.HttpResponseCodes.*;
 
 import java.util.ArrayList;
 import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -30,6 +34,12 @@ public class UserService {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Value("${auth.service.url}")
+    private String authServiceUrl;
 
     // Method to create a user
     public ApiResponse<RegisterUser> createUser(RegisterUser user) {
@@ -69,6 +79,31 @@ public class UserService {
         return ApiResponse.success(SUCCESS_CODE, response, LOGIN_SUCCESSFULLY);
     }
 
+    public boolean checkUserExists(String token) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Authorization", token);
+            HttpEntity<String> entity = new HttpEntity<>(headers);
+
+            String authUrl = authServiceUrl + "/getUser"; // The URL of the auth microservice
+
+            ResponseEntity<RegisterUser> response = restTemplate.exchange(authUrl, HttpMethod.GET, entity, RegisterUser.class);
+            System.out.println("responseAddCategory"+response);
+            if (response.getStatusCode() == HttpStatus.OK) {
+                return true; // User exists
+            }
+            return false; // User doesn't exist or token is invalid
+        } catch (Exception e) {
+            return false; // Handle cases where the call fails
+        }
+    }
+
+    //method to get user profile
+    public RegisterUser findUserByUsername(String username) {
+        return userRegisterRepository.findByUsername(username)
+                .orElse(null); // Return null if user is not found
+    }
+
     // Method to load user details by username
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("Attempting to load user with username: " + username); // Log the attempt
@@ -79,9 +114,5 @@ public class UserService {
                 new ArrayList<>());
     }
 
-    public RegisterUser findUserByUsername(String username) {
-        return userRegisterRepository.findByUsername(username)
-                .orElse(null); // Return null if user is not found
-    }
 
 }
