@@ -1,4 +1,4 @@
-package auth_microservice;
+package com.apprack.auth.constants;
 
 public class HttpResponseMessages {
     //Success Messages

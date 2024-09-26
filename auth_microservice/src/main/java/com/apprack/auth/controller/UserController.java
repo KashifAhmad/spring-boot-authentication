@@ -42,6 +42,19 @@ public class UserController {
         return new ResponseEntity<>(response, status);
     }
 
+    @DeleteMapping("/delete_user/{id}")
+    public ResponseEntity<ApiResponse<String>> deleteUser(@RequestHeader("Authorization") String tokenWithBearer, @PathVariable Long id) {
+        try {
+            ApiResponse<String> response = userService.deleteUser(id);
+            HttpStatus status = HttpStatus.valueOf(response.getCode());
+            return new ResponseEntity<>(response, status);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
     @GetMapping("/profile")
     public ResponseEntity<ApiResponse<RegisterUser>> getProfile(@AuthenticationPrincipal UserDetails userDetails) {
         String username = userDetails.getUsername(); // Get the username from the authenticated user details

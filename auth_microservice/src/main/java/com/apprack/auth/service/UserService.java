@@ -1,5 +1,6 @@
 package com.apprack.auth.service;
 
+import com.apprack.auth.constants.HttpResponseCodes;
 import com.apprack.auth.model.*;
 import com.apprack.auth.repository.UserLoginRepository;
 import com.apprack.auth.repository.UserRegisterRepository;
@@ -13,8 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import static auth_microservice.HttpResponseMessages.*;
 import static com.apprack.auth.constants.HttpResponseCodes.*;
+import static com.apprack.auth.constants.HttpResponseMessages.*;
 
 
 import java.util.ArrayList;
@@ -78,6 +79,23 @@ public class UserService {
 
         return ApiResponse.success(SUCCESS_CODE, response, LOGIN_SUCCESSFULLY);
     }
+
+    public ApiResponse<String> deleteUser(Long userId) {
+        Optional<RegisterUser> userOptional = userRegisterRepository.findById(userId);
+
+        if (!userOptional.isPresent()) {
+            // Return an appropriate response if the user is not found
+            return ApiResponse.error(UNAUTHORIZED_CODE,USER_NOT_FOUND);
+        }
+        try {
+            userRegisterRepository.deleteById(userId); // Delete the user
+            return ApiResponse.success(SUCCESS_CODE, USER_DELETED, USER_DELETED);
+        } catch (Exception e) {
+            // Handle any unexpected exceptions
+            return ApiResponse.error(HttpResponseCodes.INTERNAL_SERVER_ERROR_CODE, INTERNAL_SERVER_ERROR_MESSAGE);
+        }
+    }
+
 
     public boolean checkUserExists(String token) {
         try {

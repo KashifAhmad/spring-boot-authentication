@@ -1,6 +1,6 @@
 package com.apprack.auth.utils;
 
-import auth_microservice.HttpResponseMessages;
+import com.apprack.auth.constants.HttpResponseMessages;
 import com.apprack.auth.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
