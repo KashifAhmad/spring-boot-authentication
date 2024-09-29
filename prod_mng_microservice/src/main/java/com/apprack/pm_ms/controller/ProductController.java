@@ -31,22 +31,24 @@ public class ProductController {
         return new ResponseEntity<>(response, status);
     }
 
+    @PutMapping("/update_product/{productId}")
+    public ResponseEntity<ApiResponse<Products>> updateProduct(@PathVariable Long productId, @RequestBody Products updatedProduct) {
+        ApiResponse<Products> response = productService.updateProduct(productId, updatedProduct);
+        HttpStatus status = HttpStatus.valueOf(response.getCode());
+        return new ResponseEntity<>(response, status);
+
+    }
+
+    @GetMapping("/get_product/{productId}")
+    public ResponseEntity<ApiResponse<Products>> getProductById(@PathVariable Long productId) {
+        ApiResponse<Products> response = productService.getProductById(productId);
+        HttpStatus status = HttpStatus.valueOf(response.getCode());
+        return new ResponseEntity<>(response, status);
+    }
 
     @PostMapping("/add_category")
     public ResponseEntity<ApiResponse<Category>> addCategory(@RequestHeader("Authorization") String tokenWithBearer, @RequestBody Category category) {
         try {
-//             Extract the actual JWT token from the Bearer token
-//            String token = tokenWithBearer.startsWith("Bearer ") ? tokenWithBearer.substring(7) : tokenWithBearer;
-//
-//            // Check if the user exists in the auth service
-//            boolean userExists = authServiceClient.checkUserExists(token);
-//
-//
-//            if (!userExists) {
-//                // Return 401 Unauthorized if the user doesn't exist
-//                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-//            }
-
             // Proceed with adding the category
             ApiResponse<Category> response = productService.addCategory(category);
             HttpStatus status = HttpStatus.valueOf(response.getCode());
@@ -94,6 +96,30 @@ public class ProductController {
             logger.error("Error fetching products: " + e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @DeleteMapping("/delete_product/{categoryId}/{productId}")
+    public ResponseEntity<ApiResponse<Void>> deleteProductFromCategory(
+            @RequestHeader("Authorization") String tokenWithBearer,
+            @PathVariable Long categoryId,
+            @PathVariable Long productId
+    ) {
+        try {
+//            String token = tokenWithBearer.startsWith("Bearer") ? tokenWithBearer.substring(7) : tokenWithBearer;
+//            boolean userExists = authServiceClient.checkUserExists(token);
+//            if(!userExists){
+//                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+//            }
+
+            ApiResponse<Void> response = productService.deleteProductFromCategory(categoryId, productId);
+            HttpStatus status = HttpStatus.valueOf(response.getCode());
+            return new ResponseEntity<>(response, status);
+
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
 

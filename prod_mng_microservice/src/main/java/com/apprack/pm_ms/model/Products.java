@@ -1,6 +1,7 @@
 package com.apprack.pm_ms.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -25,10 +26,11 @@ public class Products {
     @Column(nullable = false)
     private BigDecimal price;
 
+
     // Many-to-One relationship with Category
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id", nullable = false)
-    @JsonBackReference
+    @JsonIgnoreProperties("products")  // Ignore the "products" field in the Category class to prevent recursion
     private Category category;
 
     // Constructors, Getters, Setters
@@ -90,4 +92,5 @@ public class Products {
     public void setCategory(Category category) {
         this.category = category;
     }
+
 }
