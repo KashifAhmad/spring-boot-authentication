@@ -3,8 +3,10 @@ package com.apprack.pm_ms.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -32,6 +34,10 @@ public class Products {
     @JoinColumn(name = "category_id", nullable = false)
     @JsonIgnoreProperties("products")  // Ignore the "products" field in the Category class to prevent recursion
     private Category category;
+
+    @ElementCollection
+    @Column(name = "image_path")
+    private List<String> imagePaths;
 
     // Constructors, Getters, Setters
     public Products() {
@@ -91,6 +97,14 @@ public class Products {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<String> getImagePaths() {
+        return imagePaths;
+    }
+
+    public void setImagePaths(List<String> imagePaths) {
+        this.imagePaths = imagePaths;
     }
 
 }

@@ -6,10 +6,15 @@ import com.apprack.pm_ms.model.ApiResponse;
 import com.apprack.pm_ms.model.Category;
 import com.apprack.pm_ms.model.Products;
 import com.apprack.pm_ms.service.ProductService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -24,11 +29,28 @@ public class ProductController {
     @Autowired
     private UserService authServiceClient;
 
-    @PostMapping("/add_product")
-    public ResponseEntity<ApiResponse<Products>> addProduct(@RequestBody Products products) {
-        ApiResponse<Products> response = productService.addProduct(products);
-        HttpStatus status = HttpStatus.valueOf(response.getCode());
-        return new ResponseEntity<>(response, status);
+    @PostMapping(value = "/add_product", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public ResponseEntity<ApiResponse<Products>> addProduct(
+            @RequestPart("product") String productJson, // Change type to String for deserialization
+            @RequestParam("images") MultipartFile[] images) throws JsonProcessingException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule()); // Ensure the module is registered
+        Products products = mapper.readValue(productJson, Products.class);
+
+
+        try {
+            // Handle image saving and get paths
+            List<String> imagePaths = productService.saveProductImages(images);
+            products.setImagePaths(imagePaths); // Assuming there's a field in Products to hold multiple paths
+
+            // Save product details
+            ApiResponse<Products> response = productService.addProduct(products);
+            HttpStatus status = HttpStatus.valueOf(response.getCode());
+            return new ResponseEntity<>(response, status);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping(value = "/update_product/{productId}", consumes = "application/json")
@@ -39,7 +61,6 @@ public class ProductController {
         HttpStatus status = HttpStatus.valueOf(response.getCode());
         return new ResponseEntity<>(response, status);
     }
-
 
 
     @GetMapping("/get_product/{productId}")

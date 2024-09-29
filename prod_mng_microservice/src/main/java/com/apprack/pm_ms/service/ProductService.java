@@ -9,9 +9,16 @@ import com.apprack.pm_ms.repository.CategoryRepository;
 import com.apprack.pm_ms.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.apprack.pm_ms.contants.HttpResponseCodes.SUCCESS_CODE;
 import static com.apprack.pm_ms.contants.HttpResponseCodes.UNAUTHORIZED_CODE;
@@ -45,6 +52,26 @@ public class ProductService {
         Products savedProduct = productRepository.save(products);
         return ApiResponse.success(SUCCESS_CODE, savedProduct, SUCCESS_MESSAGE);
     }
+
+    public List<String> saveProductImages(MultipartFile[] images) throws IOException {
+        List<String> imagePaths = new ArrayList<>();
+        String directory = "/Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/images/";
+
+        for (MultipartFile image : images) {
+            // Generate a unique filename
+            String filename = UUID.randomUUID().toString() + "_" + image.getOriginalFilename();
+            Path imagePath = Paths.get(directory, filename);
+
+            // Save the file
+            Files.copy(image.getInputStream(), imagePath);
+
+            // Add the path to the list
+            imagePaths.add(imagePath.toString());
+        }
+
+        return imagePaths;  // Return the list of image paths
+    }
+
 
 
     public ApiResponse<Category> addCategory(Category category) {
