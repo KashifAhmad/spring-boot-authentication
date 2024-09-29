@@ -31,13 +31,16 @@ public class ProductController {
         return new ResponseEntity<>(response, status);
     }
 
-    @PutMapping("/update_product/{productId}")
-    public ResponseEntity<ApiResponse<Products>> updateProduct(@PathVariable Long productId, @RequestBody Products updatedProduct) {
+    @PutMapping(value = "/update_product/{productId}", consumes = "application/json")
+    public ResponseEntity<ApiResponse<Products>> updateProduct(
+            @PathVariable Long productId,
+            @RequestBody Products updatedProduct) {
         ApiResponse<Products> response = productService.updateProduct(productId, updatedProduct);
         HttpStatus status = HttpStatus.valueOf(response.getCode());
         return new ResponseEntity<>(response, status);
-
     }
+
+
 
     @GetMapping("/get_product/{productId}")
     public ResponseEntity<ApiResponse<Products>> getProductById(@PathVariable Long productId) {
@@ -105,11 +108,6 @@ public class ProductController {
             @PathVariable Long productId
     ) {
         try {
-//            String token = tokenWithBearer.startsWith("Bearer") ? tokenWithBearer.substring(7) : tokenWithBearer;
-//            boolean userExists = authServiceClient.checkUserExists(token);
-//            if(!userExists){
-//                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-//            }
 
             ApiResponse<Void> response = productService.deleteProductFromCategory(categoryId, productId);
             HttpStatus status = HttpStatus.valueOf(response.getCode());

@@ -21,7 +21,7 @@ public class Category {
 
     // One-to-Many relationship with Product
     @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonManagedReference
+//    @JsonManagedReference
     private Set<Products> products = new HashSet<>();
 
     // Constructors, Getters, Setters

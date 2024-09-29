@@ -113,32 +113,26 @@ public class ProductService {
     }
 
     public ApiResponse<Products> updateProduct(Long productId, Products updatedProduct) {
-        try {
-            // Fetch the existing product by ID
-            Products existingProduct = productRepository.findById(productId)
-                    .orElseThrow(() -> new RuntimeException(PRODUCT_NOT_FOUND));
+        // Check if the product exists
+        Products existingProduct = productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException(PRODUCT_NOT_FOUND));
 
-            // Fetch the category if a new category is provided
-            Long categoryId = updatedProduct.getCategory().getCategoryId();
-            Category existingCategory = categoryRepository.findById(categoryId)
-                    .orElseThrow(() -> new RuntimeException(CATEGORY_NOT_FOUND));
+        // Check if the category exists
+        Long categoryId = updatedProduct.getCategory().getCategoryId();
+        Category existingCategory = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException(CATEGORY_NOT_FOUND));
 
-            // Update the product fields
-            existingProduct.setProductName(updatedProduct.getProductName());
-            existingProduct.setQuantity(updatedProduct.getQuantity());
-            existingProduct.setExpiryDate(updatedProduct.getExpiryDate());
-            existingProduct.setPrice(updatedProduct.getPrice());
+        // Update product fields
+        existingProduct.setProductName(updatedProduct.getProductName());
+        existingProduct.setQuantity(updatedProduct.getQuantity());
+        existingProduct.setExpiryDate(updatedProduct.getExpiryDate());
+        existingProduct.setPrice(updatedProduct.getPrice());
+        existingProduct.setCategory(existingCategory); // Set updated category
 
-            // Set the existing category to the updated product
-            existingProduct.setCategory(existingCategory);
+        // Save updated product
+        Products savedProduct = productRepository.save(existingProduct);
 
-            // Save the updated product
-            Products savedProduct = productRepository.save(existingProduct);
-
-            return ApiResponse.success(SUCCESS_CODE, savedProduct, "Product updated successfully");
-        } catch (Exception e) {
-            return ApiResponse.error(HttpResponseCodes.INTERNAL_SERVER_ERROR_CODE, "Failed to update product");
-        }
+        return ApiResponse.success(SUCCESS_CODE, savedProduct, PRODUCT_UPDATED);
     }
 
     public ApiResponse<Products> getProductById(Long productId) {
