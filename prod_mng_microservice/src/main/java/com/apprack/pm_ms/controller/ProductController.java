@@ -37,8 +37,6 @@ public class ProductController {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule()); // Ensure the module is registered
         Products products = mapper.readValue(productJson, Products.class);
-
-
         try {
             // Handle image saving and get paths
             List<String> imagePaths = productService.saveProductImages(images);

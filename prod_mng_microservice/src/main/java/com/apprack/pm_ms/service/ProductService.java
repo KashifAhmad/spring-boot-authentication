@@ -1,7 +1,6 @@
 package com.apprack.pm_ms.service;
 
 import com.apprack.pm_ms.contants.HttpResponseCodes;
-import com.apprack.pm_ms.contants.HttpResponseMessages;
 import com.apprack.pm_ms.model.ApiResponse;
 import com.apprack.pm_ms.model.Category;
 import com.apprack.pm_ms.model.Products;
@@ -45,7 +44,7 @@ public class ProductService {
         // Check if the product already exists
         Products existingProduct = productRepository.findByProductName(products.getProductName());
         if (existingProduct != null) {
-            return ApiResponse.error(UNAUTHORIZED_CODE, USERNAME_ALREADY_EXISTS);
+            return ApiResponse.error(UNAUTHORIZED_CODE, ALREADY_EXISTS);
         }
 
         // Save the new product
@@ -59,7 +58,7 @@ public class ProductService {
 
         for (MultipartFile image : images) {
             // Generate a unique filename
-            String filename = UUID.randomUUID().toString() + "_" + image.getOriginalFilename();
+            String filename = UUID.randomUUID() + "_" + image.getOriginalFilename();
             Path imagePath = Paths.get(directory, filename);
 
             // Save the file
@@ -78,25 +77,27 @@ public class ProductService {
         System.out.println("Received_category: " + category.getCategoryName()); // Debug log
         Category existingCategory = categoryRepository.findByCategoryName(category.getCategoryName());
         if (existingCategory != null) {
-            return ApiResponse.error(UNAUTHORIZED_CODE, USERNAME_ALREADY_EXISTS);
+            return ApiResponse.error(UNAUTHORIZED_CODE, CATEGORY_ALREADY_EXISTS);
         }
 
         // Save the new category
         Category savedCategory = categoryRepository.save(category);
-        return ApiResponse.success(SUCCESS_CODE, savedCategory, SUCCESS_MESSAGE);
+        return ApiResponse.success(SUCCESS_CODE, savedCategory, CATEGORY_ADDED);
     }
+
 
     public ApiResponse<List<Category>> getAllCategories() {
         List<Category> categories = categoryRepository.findAll();
         return ApiResponse.success(SUCCESS_CODE, categories, SUCCESS_MESSAGE);
     }
 
+
     public ApiResponse<String> deleteCategory(Long categoryId) {
         Optional<Category> categoryOptional = categoryRepository.findById(categoryId);
 
         if (!categoryOptional.isPresent()) {
             // Return an appropriate response if the category is not found
-            return ApiResponse.error(UNAUTHORIZED_CODE, USERNAME_ALREADY_EXISTS);
+            return ApiResponse.error(UNAUTHORIZED_CODE, CATEGORY_ALREADY_EXISTS);
         }
         try {
             categoryRepository.deleteById(categoryId); // Delete the category
