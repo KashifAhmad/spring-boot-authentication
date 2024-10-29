@@ -11,6 +11,7 @@
     <modules>
         <module>prod_mng_microservice</module>
         <module>auth_microservice</module>
+        <module>inventory_mng_ms</module>
         <!-- Add other microservice modules here -->
     </modules>
 

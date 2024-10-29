@@ -1,7 +1,6 @@
+package com.apprack.inventory.configuration;
 
-package com.apprack.pm_ms.configuration;
-
-import com.apprack.pm_ms.utils.JwtRequestFilter;
+import com.apprack.auth.utils.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,21 +13,21 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-public class ProductsSecurityConfig {
-
+public class InventorySecurityConfig {
     @Autowired
-    private JwtRequestFilter jwtRequestFilter; // Your JWT filter for token validation
+    private JwtRequestFilter jwtRequestFilter;
 
-    @Bean(name = "productsSecurityFilterChain") // Changed name
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    @Bean(name = "inventorySecurityFilterChain")
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable) // Disable CSRF protection
                 .authorizeHttpRequests((requests) -> requests
-//                        .requestMatchers("/products/add_product", "/products/add_category", "/products/get_all_categories").permitAll()
-                        .anyRequest().authenticated()
+//                        .anyRequest().permitAll() // public endpoints
+                        .anyRequest().authenticated()         // secure other endpoints//                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Make session stateless
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
@@ -36,10 +35,11 @@ public class ProductsSecurityConfig {
         return http.build();
     }
 
-    @Bean(name = "productCorsConfigurationSource")
+
+    @Bean(name = "inventoryCorsConfigurationSource")
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8082")); // Add your localhost URL for testing
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8083")); // Add your localhost URL for testing
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true); // Allow credentials like cookies or authorization headers
@@ -48,5 +48,6 @@ public class ProductsSecurityConfig {
         source.registerCorsConfiguration("/**", configuration); // Apply to all endpoints
         return source;
     }
+
 
 }

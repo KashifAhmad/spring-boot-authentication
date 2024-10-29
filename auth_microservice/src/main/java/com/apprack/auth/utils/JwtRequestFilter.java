@@ -35,33 +35,36 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             throws IOException, ServletException {
 
         final String authorizationHeader = request.getHeader("Authorization");
-
         String username = null;
         String jwt = null;
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
             username = jwtTokenUtil.extractUsername(jwt);
+            System.out.println("Extracted_JWT: " + jwt);
+            System.out.println("Extracted Username: " + username);
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             try {
                 UserDetails userDetails = userService.loadUserByUsername(username);
+                System.out.println("UserDetails loaded: " + userDetails.getUsername());
 
                 if (jwtTokenUtil.validateToken(jwt, userDetails.getUsername())) {
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                             userDetails, null, userDetails.getAuthorities());
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                    System.out.println("User authenticated: " + userDetails.getUsername());
                 }
             } catch (UsernameNotFoundException e) {
-                // Log the exception
                 System.err.println("Username not found: " + e.getMessage());
-                response.sendError(HttpServletResponse.SC_USE_PROXY, HttpResponseMessages.USER_NOT_FOUND);
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User not found");
                 return; // Stop further processing
             }
         }
         chain.doFilter(request, response);
     }
+
 
 }
