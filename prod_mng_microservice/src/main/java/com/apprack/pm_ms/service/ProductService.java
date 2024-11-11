@@ -72,7 +72,6 @@ public class ProductService {
     }
 
 
-
     public ApiResponse<Category> addCategory(Category category) {
         System.out.println("Received_category: " + category.getCategoryName()); // Debug log
         Category existingCategory = categoryRepository.findByCategoryName(category.getCategoryName());
@@ -171,5 +170,24 @@ public class ProductService {
         } catch (Exception e) {
             return ApiResponse.error(HttpResponseCodes.NOT_FOUND_CODE, PRODUCT_NOT_FOUND);
         }
+    }
+
+    public ApiResponse<String> restockProduct(Long productId, int quantityToAdd) {
+        Optional<Products> productOpt = productRepository.findById(productId);
+        if (productOpt.isPresent()) {
+            Products product = productOpt.get();
+            product.setQuantity(product.getQuantity() + quantityToAdd);
+
+            productRepository.save(product);
+
+            if(product.getQuantity() <5){
+                //need to trigger alert here
+            }
+
+            return ApiResponse.success(HttpResponseCodes.SUCCESS_CODE, "Product restocked successfully", "Success");
+        } else {
+            return ApiResponse.error(HttpResponseCodes.NOT_FOUND_CODE, "Product not found");
+        }
+
     }
 }

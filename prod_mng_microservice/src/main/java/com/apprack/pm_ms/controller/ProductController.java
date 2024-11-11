@@ -138,6 +138,18 @@ public class ProductController {
         }
 
     }
+    @PutMapping("/restock_product/{productId}")
+    public ResponseEntity<ApiResponse<String>> restockProduct(
+            @PathVariable Long productId,
+            @RequestParam int quantityToAdd) {
+        try {
+            ApiResponse<String> response = productService.restockProduct(productId, quantityToAdd);
+            HttpStatus status = HttpStatus.valueOf(response.getCode());
+            return new ResponseEntity<>(response, status);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 }
