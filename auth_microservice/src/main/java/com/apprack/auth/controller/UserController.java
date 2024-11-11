@@ -13,6 +13,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.apprack.auth.constants.HttpResponseCodes.NOT_FOUND_CODE;
 import static com.apprack.auth.constants.HttpResponseCodes.SUCCESS_CODE;
 
@@ -41,6 +43,19 @@ public class UserController {
         HttpStatus status = HttpStatus.valueOf(response.getCode());
         return new ResponseEntity<>(response, status);
     }
+
+    @GetMapping("/validateToken")
+    public ResponseEntity<UserDetails> validateToken(@RequestHeader("Authorization") String token) {
+        String jwt = token.substring(7);
+        String username = jwtTokenUtil.extractUsername(jwt);
+
+        if (username != null && jwtTokenUtil.validateToken(jwt, username)) {
+            UserDetails userDetails = userService.loadUserByUsername(username);
+            return ResponseEntity.ok(userDetails);
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
+
 
     @DeleteMapping("/delete_user/{id}")
     public ResponseEntity<ApiResponse<String>> deleteUser(@RequestHeader("Authorization") String tokenWithBearer, @PathVariable Long id) {
@@ -84,6 +99,12 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
         }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<ApiResponse<List<RegisterUser>>> getAllUsers() {
+        ApiResponse<List<RegisterUser>> response = userService.getAllUsers();
+        return new ResponseEntity<>(response, HttpStatus.valueOf(response.getCode()));
     }
 
 }

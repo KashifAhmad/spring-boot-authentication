@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="auth_microservice" />
         <module name="prod_mng_microservice" />
+        <module name="inventory_mng_ms" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

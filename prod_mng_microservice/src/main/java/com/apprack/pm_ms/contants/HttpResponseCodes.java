@@ -8,5 +8,6 @@ public class HttpResponseCodes {
     public static final int INTERNAL_SERVER_ERROR_CODE = 500;
     public static final int BAD_GATEWAY_CODE = 502;
     public static final int SERVICE_UNAVAILABLE_CODE = 503;
+    public static final int BAD_REQUEST_CODE = 199;
     // Add other status codes as needed
 }
