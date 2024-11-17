@@ -1,5 +1,3 @@
-version: '3.8' # Docker Compose version
-
 services:
   app:
     image: demo-spring-app # The Docker image for your Spring Boot app
