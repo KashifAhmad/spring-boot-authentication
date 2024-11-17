@@ -6,11 +6,11 @@
     <parent>
         <groupId>com.example</groupId>
         <artifactId>demo-spring</artifactId> <!-- Parent should be the root POM -->
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
         <relativePath>../pom.xml</relativePath> <!-- Adjust this based on your directory structure -->
     </parent>
     <artifactId>prod_mng_microservice</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}</version>
     <packaging>jar</packaging>
 
     <name>demoJavaSpring</name>
@@ -84,7 +84,7 @@
         <dependency>
             <groupId>com.apprack</groupId>
             <artifactId>auth_microservice</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.1</version>
         </dependency>
 
 

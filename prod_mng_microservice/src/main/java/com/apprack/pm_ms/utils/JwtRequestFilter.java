@@ -1,6 +1,5 @@
 package com.apprack.pm_ms.utils;
 
-import auth_microservice.HttpResponseMessages;
 import com.apprack.auth.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
