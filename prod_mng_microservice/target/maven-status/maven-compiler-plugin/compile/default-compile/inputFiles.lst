@@ -2,6 +2,7 @@
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/prod_mng_microservice/src/main/java/com/apprack/pm_ms/utils/KeyGeneratorUtil.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/prod_mng_microservice/src/main/java/com/apprack/pm_ms/model/ApiResponse.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/prod_mng_microservice/src/main/java/com/apprack/pm_ms/exception/ProductExceptionHandler.java
+/Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/prod_mng_microservice/src/main/java/com/apprack/pm_ms/configuration/JacksonConfig.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/prod_mng_microservice/src/main/java/com/apprack/pm_ms/configuration/ProductsSecurityConfig.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/prod_mng_microservice/src/main/java/com/apprack/pm_ms/ProductManagementApplication.java
 /Users/kashif/Desktop/javaSpringRack/spring-boot-authentication/prod_mng_microservice/src/main/java/com/apprack/pm_ms/contants/HttpResponseMessages.java

@@ -8,6 +8,7 @@ com/apprack/pm_ms/exception/ProductExceptionHandler.class
 com/apprack/pm_ms/repository/ProductRepository.class
 com/apprack/pm_ms/model/Products.class
 com/apprack/pm_ms/model/Category.class
+com/apprack/pm_ms/configuration/JacksonConfig.class
 com/apprack/pm_ms/utils/JwtRequestFilter.class
 com/apprack/pm_ms/exception/ProductAlreadyExistsException.class
 com/apprack/pm_ms/utils/KeyGeneratorUtil.class

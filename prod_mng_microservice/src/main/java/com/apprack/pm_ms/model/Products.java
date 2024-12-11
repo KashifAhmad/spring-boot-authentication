@@ -1,6 +1,7 @@
 package com.apprack.pm_ms.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public class Products {
     @Column(nullable = false)
     private int quantity;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Column(name = "expiry_date", nullable = false)
     private LocalDate expiryDate;
 

@@ -6,10 +6,13 @@ import com.apprack.pm_ms.model.ApiResponse;
 import com.apprack.pm_ms.model.Category;
 import com.apprack.pm_ms.model.Products;
 import com.apprack.pm_ms.service.ProductService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -24,8 +27,20 @@ public class ProductController {
     @Autowired
     private UserService authServiceClient;
 
-    @PostMapping("/add_product")
-    public ResponseEntity<ApiResponse<Products>> addProduct(@RequestBody Products products) {
+    @PostMapping(value = "/add_product", consumes = "multipart/form-data")
+    public ResponseEntity<ApiResponse<Products>> addProduct(
+            @RequestPart("product") String productJson,
+            @RequestPart(value = "images", required = false) MultipartFile file) throws JsonProcessingException {
+
+        // Deserialize the JSON string into a Products object
+        Products products = new ObjectMapper().readValue(productJson, Products.class);
+
+        // Process the file if needed
+        if (file != null) {
+            // Handle the file upload logic here
+        }
+
+        // Call the service
         ApiResponse<Products> response = productService.addProduct(products);
         HttpStatus status = HttpStatus.valueOf(response.getCode());
         return new ResponseEntity<>(response, status);

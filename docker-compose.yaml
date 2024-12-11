@@ -1,10 +1,37 @@
+version: '3.8'
+
 services:
-  app:
-    image: demo-spring-app # The Docker image for your Spring Boot app
+  auth:
+    build:
+      context: ./auth_microservice
+      dockerfile: Dockerfile
     ports:
       - "8080:8080" # Expose port 8080 to the host
     depends_on:
-      - db # Optional if you have a database
+      - db # Wait for the database to start
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: demo_db
+      DB_USER: postgres
+      DB_PASSWORD: 12345678
+
+  pms:
+    build:
+      context: ./prod_mng_microservice
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082" # Expose port 8082 to the host
+    depends_on:
+      - db # Wait for the database to start
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: demo_db
+      DB_USER: postgres
+      DB_PASSWORD: 12345678
 
   db:
     image: postgres:14 # PostgreSQL image
