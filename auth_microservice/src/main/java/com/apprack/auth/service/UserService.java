@@ -19,6 +19,7 @@ import static com.apprack.auth.constants.HttpResponseMessages.*;
 
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -133,4 +134,12 @@ public class UserService {
     }
 
 
+    public ApiResponse<List<RegisterUser>> getAllUsers() {
+        try {
+            List<RegisterUser> users = userRegisterRepository.findAll();
+            return ApiResponse.success(SUCCESS_CODE, users, "Users retrieved successfully");
+        } catch (Exception e) {
+            return ApiResponse.error(HttpResponseCodes.INTERNAL_SERVER_ERROR_CODE, "Failed to retrieve users");
+        }
+    }
 }

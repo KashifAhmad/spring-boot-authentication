@@ -1,5 +1,6 @@
 package com.apprack.pm_ms.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.HashSet;
@@ -7,6 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "categories")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})  // Add this to ignore unnecessary properties
 public class Category {
 
     @Id
@@ -19,7 +21,7 @@ public class Category {
 
     // One-to-Many relationship with Product
     @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonManagedReference
+//    @JsonManagedReference
     private Set<Products> products = new HashSet<>();
 
     // Constructors, Getters, Setters

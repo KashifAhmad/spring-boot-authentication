@@ -30,7 +30,7 @@ public class ProductsSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable) // Disable CSRF protection
                 .authorizeHttpRequests((requests) -> requests
-//                        .requestMatchers("/products/add_product", "/products/add_category", "/products/get_all_categories").permitAll()
+//                        .requestMatchers("/products/get_products").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Make session stateless
@@ -39,7 +39,7 @@ public class ProductsSecurityConfig {
         return http.build();
     }
 
-    @Bean
+    @Bean(name = "productCorsConfigurationSource")
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:8082")); // Add your localhost URL for testing
