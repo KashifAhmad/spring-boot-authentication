@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.example</groupId>
-        <artifactId>demo-spring</artifactId> <!-- Parent should be the root POM -->
+        <artifactId>pharma-app</artifactId> <!-- Parent should be the root POM -->
         <version>0.0.1</version>
         <relativePath>../pom.xml</relativePath> <!-- Adjust this based on your directory structure -->
     </parent>
@@ -13,7 +13,7 @@
     <version>${revision}</version>
     <packaging>jar</packaging>
 
-    <name>demoJavaSpring</name>
+    <name>k-and-h-stocker</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

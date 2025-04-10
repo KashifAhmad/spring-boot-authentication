@@ -7,6 +7,7 @@ import com.apprack.pm_ms.model.Category;
 import com.apprack.pm_ms.model.Products;
 import com.apprack.pm_ms.service.ProductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,12 @@ public class ProductController {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule()); // Ensure the module is registered
-        Products products = mapper.readValue(productJson, Products.class);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); // Ignore unknown properties
+
+        logger.debug("newUpdated", productJson);
         try {
+            Products products = mapper.readValue(productJson, Products.class);
+
             // Handle image saving and get paths
             List<String> imagePaths = productService.saveProductImages(images);
             products.setImagePaths(imagePaths); // Assuming there's a field in Products to hold multiple paths
