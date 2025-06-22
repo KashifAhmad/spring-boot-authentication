@@ -4,8 +4,8 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.example</groupId>
-        <artifactId>pharma-app</artifactId> <!-- Parent should be the root POM -->
+        <groupId>com.pharma</groupId>
+        <artifactId>stocker</artifactId> <!-- Parent should be the root POM -->
         <version>0.0.1</version>
         <relativePath>../pom.xml</relativePath> <!-- Adjust this based on your directory structure -->
     </parent>
@@ -85,8 +85,8 @@
 
         <dependency>
             <groupId>com.apprack</groupId>
-            <artifactId>auth_microservice</artifactId>
-            <version>0.0.1</version>
+            <artifactId>auth_common</artifactId>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
     <build>

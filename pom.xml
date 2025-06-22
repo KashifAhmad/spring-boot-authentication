@@ -3,14 +3,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.example</groupId>
-    <artifactId>pharma-app</artifactId>
+    <groupId>com.pharma</groupId>
+    <artifactId>stocker</artifactId>
     <version>0.0.1</version>
     <packaging>pom</packaging> <!-- Make this the parent project -->
 
     <modules>
-        <module>prod_mng_microservice</module>
+        <module>auth_common</module>
         <module>auth_microservice</module>
+        <module>prod_mng_microservice</module>
+        <module>inventory_service</module>
         <!-- Add other microservice modules here -->
     </modules>
 

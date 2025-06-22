@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import static com.apprack.auth.constants.HttpResponseCodes.*;
 import static com.apprack.auth.constants.HttpResponseMessages.*;
+import static com.apprack.auth_common.constants.HttpResponseMessages.INTERNAL_SERVER_ERROR_MESSAGE;
 
 
 import java.util.ArrayList;

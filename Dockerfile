@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the jar file from the host into the container
-COPY target/pharma-app-0.0.1-SNAPSHOT.jar app.jar
+#COPY target/pharma-app-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the port the app runs on
 EXPOSE 8080

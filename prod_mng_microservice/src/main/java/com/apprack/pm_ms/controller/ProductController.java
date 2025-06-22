@@ -1,10 +1,11 @@
 package com.apprack.pm_ms.controller;
 
 import ch.qos.logback.classic.Logger;
-import com.apprack.auth.service.UserService;
 import com.apprack.pm_ms.model.ApiResponse;
 import com.apprack.pm_ms.model.Category;
 import com.apprack.pm_ms.model.Products;
+import com.apprack.pm_ms.model.sale.SaleItem;
+import com.apprack.pm_ms.model.sale.SaleRequest;
 import com.apprack.pm_ms.service.ProductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -26,9 +27,6 @@ public class ProductController {
     @Autowired
     private ProductService productService;
     Logger logger;
-
-    @Autowired
-    private UserService authServiceClient;
 
     @PostMapping(value = "/add_product", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<ApiResponse<Products>> addProduct(
@@ -156,5 +154,10 @@ public class ProductController {
         }
     }
 
+    @PostMapping("/sale")
+    public ResponseEntity<?> saleInvoice(@RequestBody SaleRequest saleRequest) {
+        ApiResponse<String> response = productService.processSaleInvoice(saleRequest);
+        return ResponseEntity.status(response.getCode()).body(response);
+    }
 
 }

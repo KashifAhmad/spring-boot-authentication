@@ -4,6 +4,8 @@ import com.apprack.pm_ms.contants.HttpResponseCodes;
 import com.apprack.pm_ms.model.ApiResponse;
 import com.apprack.pm_ms.model.Category;
 import com.apprack.pm_ms.model.Products;
+import com.apprack.pm_ms.model.sale.SaleItem;
+import com.apprack.pm_ms.model.sale.SaleRequest;
 import com.apprack.pm_ms.repository.CategoryRepository;
 import com.apprack.pm_ms.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -190,4 +192,25 @@ public class ProductService {
         }
 
     }
+
+    public ApiResponse<String> processSaleInvoice(SaleRequest saleRequest) {
+        for (SaleItem item : saleRequest.getProducts()) {
+            Products product = productRepository.findByProductName(item.getProductName());
+            if (product == null) {
+                throw new RuntimeException("Product " + item.getProductName() + " not found");
+            }
+
+            if (product.getQuantity() < item.getQuantity()) {
+                return ApiResponse.error(HttpResponseCodes.UNAUTHORIZED_CODE,
+                        "Insufficient stock for product: " + product.getProductName());
+            }
+
+            product.setQuantity(product.getQuantity() - item.getQuantity());
+            productRepository.save(product);
+        }
+
+        return ApiResponse.success(SUCCESS_CODE,
+                "Stock updated successfully for invoice: " + saleRequest.getInvoiceNumber(), SUCCESS_MESSAGE);
+    }
+
 }

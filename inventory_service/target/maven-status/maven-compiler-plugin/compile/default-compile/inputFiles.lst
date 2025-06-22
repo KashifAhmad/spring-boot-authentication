@@ -1,0 +1,16 @@
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/utils/KeyGeneratorUtil.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/exception/InventoryExceptionHandler.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/service/InventoryService.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/model/ApiResponse.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/configuration/JacksonConfig.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/model/Category.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/InventoryServiceApplication.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/utils/JwtRequestFilter.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/repository/InventoryRepository.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/controller/InventoryController.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/repository/ProductRepository.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/exception/InventoryAlreadyExistsException.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/configuration/InventorySecurityConfig.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/contants/HttpResponseCodes.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/model/Products.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/inventory_service/src/main/java/com/apprack/inventory/contants/HttpResponseMessages.java

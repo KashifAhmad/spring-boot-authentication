@@ -6,13 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="inventory_service" />
         <module name="prod_mng_microservice" />
         <module name="auth_microservice" />
         <module name="prod_mng_ms" />
         <module name="inventory_mng_ms" />
+        <module name="auth_common" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="InventoryService" target="17" />
       <module name="prod-mng-microservice" target="17" />
     </bytecodeTargetLevel>
   </component>

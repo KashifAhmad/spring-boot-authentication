@@ -2,9 +2,14 @@
 /Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/contants/HttpResponseCodes.java
 /Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/service/ProductService.java
 /Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/ProductManagementApplication.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/model/sale/SaleRequest.java
 /Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/exception/ProductExceptionHandler.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/model/sale/BuyerInfo.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/model/sale/SaleInvoiceItem.java
 /Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/repository/ProductRepository.java
 /Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/contants/HttpResponseMessages.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/model/sale/SaleInvoice.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/model/sale/SaleItem.java
 /Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/configuration/JacksonConfig.java
 /Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/utils/JwtTokenUtil.java
 /Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/utils/JwtRequestFilter.java
@@ -13,5 +18,7 @@
 /Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/repository/CategoryRepository.java
 /Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/exception/ProductAlreadyExistsException.java
 /Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/controller/ProductController.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/service/SaleService.java
 /Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/model/ApiResponse.java
 /Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/configuration/ProductsSecurityConfig.java
+/Users/kashif/Desktop/javaSpringRack/k-and-h-stocker/prod_mng_microservice/src/main/java/com/apprack/pm_ms/controller/SaleController.java
